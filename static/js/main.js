@@ -54,5 +54,4 @@ function initialize(lat, lng) {
 
 document.addEventListener('DOMContentLoaded', function () {
   getLocation()
-  showPosition();
 });
