@@ -40,19 +40,19 @@ html, body, .page{
 
 h1.app-title{
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 h1.app-title span{
   border-bottom: 1px solid #333;
 }
 .map{
   height: 310px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   width: 100%;
 }
 h2.found-a-place {
   font-size: 1.4em;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .button{
