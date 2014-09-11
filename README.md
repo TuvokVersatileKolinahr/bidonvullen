@@ -5,14 +5,14 @@ bidonvullen
 
 ### Installation ###
 
-  git clone git@github.com:TuvokVersatileKolinahr/bidonvullen.git
+    git clone git@github.com:TuvokVersatileKolinahr/bidonvullen.git
 
-  cd bidonvullen
+    cd bidonvullen
 
-  npm install
+    npm install
 
 ### Running tests ###
 
-  npm test
+    npm test
 
 Open the app on a mobile.

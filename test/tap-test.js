@@ -1,11 +1,8 @@
 var request = require('supertest'),
     should = require('should'),
     express = require('express');
-var dimsum = require('dimsum');
+var dimsum = require('dimsum').configure({ flavor: 'jabberwocky' });
 var app = require('../app.js');
-
-
-dimsum.configure({ flavor: 'jabberwocky' });
 
 var api_uri = 'api/taps'
 var tap_name = dimsum(1);
