@@ -4,7 +4,7 @@ var request = require('supertest'),
 var dimsum = require('dimsum').configure({ flavor: 'jabberwocky' });
 var app = require('../app.js');
 
-var api_uri = 'api/taps'
+var api_uri = '/taps'
 var tap_name = dimsum(1);
 var tap_description = dimsum.sentence(2);
 var tap_geolocation = { lat: 1, lng: 1 }
