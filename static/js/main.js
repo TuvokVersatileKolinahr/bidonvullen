@@ -52,6 +52,52 @@ function initialize(lat, lng) {
 
 }
 
+function whichTransitionEvent(){
+    var t, el = document.createElement('fakeelement'), transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    };
+
+    for(t in transitions){
+        if( el.style[t] !== undefined ){
+            return transitions[t];
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  getLocation()
+  getLocation();
+
+  var nodes;
+  nodes = document.querySelectorAll('.navigation');
+  for (var i=0; i<nodes.length; i++){
+    nodes[i].addEventListener('click', function(){
+      var currentPage = document.querySelector('.page.current');
+      var targetPage = document.getElementById(this.dataset.target);
+      var self = this;
+
+      var transitionEvenName = whichTransitionEvent();
+      
+      currentPage.classList.add(this.dataset.animation);
+      targetPage.classList.add('current');
+      targetPage.classList.add(this.dataset.targetanimation);
+      targetPage.classList.add('on-top');
+    
+      var onEndAnimationCurrentPage = function(){
+        this.classList.remove(self.dataset.animation);
+        this.classList.remove('current');
+        currentPage.removeEventListener(transitionEvenName, onEndAnimationCurrentPage);
+      }
+      var onEndAnimationTargetPage = function(){
+         this.classList.remove(self.dataset.targetanimation);
+         targetPage.removeEventListener(transitionEvenName, onEndAnimationTargetPage);
+         targetPage.classList.remove('on-top');
+      };
+      currentPage.addEventListener(transitionEvenName, onEndAnimationCurrentPage, false);
+
+      targetPage.addEventListener(transitionEvenName, onEndAnimationTargetPage, false);
+    })
+  }
 });

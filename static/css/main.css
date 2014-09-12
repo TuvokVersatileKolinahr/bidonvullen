@@ -26,16 +26,145 @@ body, textarea, select{
 
 html, body, .page{
   height: 100%;
+  overflow: hidden;
   width: 100%;
 }
-
+body{
+  background-color: #333;
+}
+.page-container{
+  position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+#main{
+  background-color:#FFCAB4;
+}
+#picture{
+  background-color: #DD87CD;
+}
+#description{
+  background-color:#87DD8A;
+}
+#availability{
+  background-color: #DDDA87;
+}
+#details{
+  background-color: #878ADD;
+}
 .page{
-  display: none;
-  padding: 5px 15px;
+  width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    width: 100%;
+    height: 100%;
 }
 .page.current{
-  display: block;
+  visibility: visible;
+  z-index: 100;
 }
+.page.on-top{
+  z-index: 999;
+}
+
+.toLeft {
+-webkit-animation: moveToLeft .6s ease-in both;
+animation: moveToLeft .6s ease-in both;
+}
+.fromLeft {
+-webkit-animation: moveFromLeft .6s ease-in both;
+animation: moveFromLeft .6s ease-in both;
+}
+.toRight {
+-webkit-animation: moveToRight .6s ease-in both;
+animation: moveToRight .6s ease-in both;
+}
+.fromRight {
+-webkit-animation: moveFromRight .6s ease-in both;
+animation: moveFromRight .6s ease-in both;
+}
+.toTop {
+-webkit-animation: moveToTop .6s ease-in both;
+animation: moveToTop .6s ease-in both;
+}
+.fromTop {
+-webkit-animation: moveFromTop .6s ease-in both;
+animation: moveFromTop .6s ease-in both;
+}
+.toBottom {
+-webkit-animation: moveToBottom .6s ease-in both;
+animation: moveToBottom .6s ease-in both;
+}
+.fromBottom {
+-webkit-animation: moveFromBottom .6s ease-in both;
+animation: moveFromBottom .6s ease-in both;
+}
+
+@-webkit-keyframes moveToLeft {
+from { }
+to { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveToLeft {
+from { }
+to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+@-webkit-keyframes moveFromLeft {
+from { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveFromLeft {
+from { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+@-webkit-keyframes moveToRight {
+from { }
+to { -webkit-transform: translateX(100%); }
+}
+@keyframes moveToRight {
+from { }
+to { -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+@-webkit-keyframes moveFromRight {
+from { -webkit-transform: translateX(100%); }
+}
+@keyframes moveFromRight {
+from { -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+@-webkit-keyframes moveToTop {
+from { }
+to { -webkit-transform: translateY(-100%); }
+}
+@keyframes moveToTop {
+from { }
+to { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+@-webkit-keyframes moveFromTop {
+from { -webkit-transform: translateY(-100%); }
+}
+@keyframes moveFromTop {
+from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+@-webkit-keyframes moveToBottom {
+from { }
+to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+from { }
+  to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+@-webkit-keyframes moveFromBottom {
+  from { -webkit-transform: translateY(100%); }
+}
+@keyframes moveFromBottom {
+  from { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
 
 
 h1.app-title{
@@ -45,7 +174,7 @@ h1.app-title{
 h1.app-title span{
   border-bottom: 1px solid #333;
 }
-.map{
+.google-map{
   height: 310px;
   margin-bottom: 5px;
   width: 100%;
@@ -64,7 +193,7 @@ h2.found-a-place {
   font-size: 1.2em;
   padding: 5px 10px;
   text-decoration: none;
-  transition: all .3s ease-in-out 0s;
+  transition: background .3s ease-in-out 0s, border .3s ease-in-out 0s;
 }
 .button:hover{
   border-color: #333;
