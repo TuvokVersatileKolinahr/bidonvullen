@@ -52,21 +52,6 @@ function initialize(lat, lng) {
 
 }
 
-function whichTransitionEvent(){
-    var t, el = document.createElement('fakeelement'), transitions = {
-      'transition':'transitionend',
-      'OTransition':'oTransitionEnd',
-      'MozTransition':'transitionend',
-      'WebkitTransition':'webkitTransitionEnd'
-    };
-
-    for(t in transitions){
-        if( el.style[t] !== undefined ){
-            return transitions[t];
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
   getLocation();
 
@@ -78,26 +63,30 @@ document.addEventListener('DOMContentLoaded', function () {
       var targetPage = document.getElementById(this.dataset.target);
       var self = this;
 
-      var transitionEvenName = whichTransitionEvent();
-      
-      currentPage.classList.add(this.dataset.animation);
+      currentPage.classList.add(this.dataset.animationout);
       targetPage.classList.add('current');
-      targetPage.classList.add(this.dataset.targetanimation);
+      targetPage.classList.add(this.dataset.animationin);
       targetPage.classList.add('on-top');
     
       var onEndAnimationCurrentPage = function(){
-        this.classList.remove(self.dataset.animation);
+        if (self.dataset.animationout){
+          this.classList.remove(self.dataset.animationout);
+        }
         this.classList.remove('current');
-        currentPage.removeEventListener(transitionEvenName, onEndAnimationCurrentPage);
+        console.log('current ', "animationend");
+        currentPage.removeEventListener("animationend", onEndAnimationCurrentPage);
       }
       var onEndAnimationTargetPage = function(){
-         this.classList.remove(self.dataset.targetanimation);
-         targetPage.removeEventListener(transitionEvenName, onEndAnimationTargetPage);
+         if (self.dataset.animationin){
+          this.classList.remove(self.dataset.animationin);
+         }
          targetPage.classList.remove('on-top');
+         console.log('target ', "animationend");
+         targetPage.removeEventListener("animationend", onEndAnimationTargetPage);
       };
-      currentPage.addEventListener(transitionEvenName, onEndAnimationCurrentPage, false);
+      currentPage.addEventListener("animationend", onEndAnimationCurrentPage, false);
 
-      targetPage.addEventListener(transitionEvenName, onEndAnimationTargetPage, false);
+      targetPage.addEventListener("animationend", onEndAnimationTargetPage, false);
     })
   }
 });
