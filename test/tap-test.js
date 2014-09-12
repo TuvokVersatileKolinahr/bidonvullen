@@ -4,10 +4,16 @@ var request = require('supertest'),
 var dimsum = require('dimsum').configure({ flavor: 'jabberwocky' });
 var app = require('../app.js');
 
+var geo = require('./helpers/geo');
+
 var api_uri = '/taps'
-var tap_name = dimsum(1);
+var tap_name = dimsum({
+    'sentences_per_paragraph': [1, 1],
+    'words_per_sentence': [1, 1],
+    'commas_per_sentence': [0, 0]
+  }).slice(0, - 1); //severe misuse of the dimsum lib to generate one word
 var tap_description = dimsum.sentence(2);
-var tap_geolocation = { lat: 1, lng: 1 }
+var tap_geolocation = geo();
 var d = '';
 
 describe('POST', function(){
