@@ -13,6 +13,7 @@ bidonvullen
 
 ### Running tests ###
 
-    npm test
+    cd bidonvullen
+    mocha
 
 Open the app on a mobile.

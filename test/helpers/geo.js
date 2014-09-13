@@ -12,7 +12,8 @@
   defaults = {
     'radius': 1,
     'center': {lat: 1, lng: 1},
-    'count': 1
+    'count': 1,
+    'output': 'json'
   },
 
   config = {},
@@ -58,14 +59,15 @@
 
     var config_1 = config,
       result = [],
-      count = count || 1;
+      count = count || 1,
+      output = output || 'json';
 
     // Temporarily overwrite the configuration
     this.configure(options);
 
     //Do the generate
     for (var i=0; i < config.count; i++) {
-      result.push(generateRandomPoint(config.center, config.radius));
+      result.push(generateRandomPoint(config.center, config.radius, config.output));
     }
 
     // Restore the original configuration
@@ -93,11 +95,14 @@
   /**
   * Private method that generates number of random geolocation points given a center and a radius.
   * Reference URL: http://goo.gl/KWcPE.
+  * 
   * @param  {Object} center A JS object with lat and lng attributes.
   * @param  {number} radius Radius in meters.
+  * @param  {output} output type, currently only json (default) and array are supported.
+  * 
   * @return {Object} The generated random points as JS object with lat and lng attributes.
   */
-  function generateRandomPoint (center, radius) {
+  function generateRandomPoint (center, radius, output) {
     var x0 = center.lng;
     var y0 = center.lat;
     // Convert Radius from meters to degrees.
@@ -112,8 +117,11 @@
     var y = w * Math.sin(t);
    
     var xp = x/Math.cos(y0);
-   
+
     // Resulting point.
+    if (output === 'array') {
+      return [y+y0,xp+x0];
+    }
     return {'lat': y+y0, 'lng': xp+x0};
   }
 
