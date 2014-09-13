@@ -52,9 +52,26 @@ function initialize(lat, lng) {
 
 }
 
+function vendorEventName(name, el){
+  var vendor = ["webkit", "moz", "MS", "o", ""];
+  if (!el){el=document.documentElement}
+  if(name.toLowerCase() in el){return name.toLowerCase();}
+  for (var i = 0; i < vendor.length; i++) {
+    if (vendor[i]+name in el){
+      return vendor[i]+name;
+    }else if (vendor[i]+name.toLowerCase() in el){
+      return vendor[i]+name.toLowerCase();
+    }
+  }
+  throw "Event " + name + " is not supported for element " + el.tagName;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   getLocation();
 
+  /*
+   * Navigation
+   */
   var nodes;
   nodes = document.querySelectorAll('.navigation');
   for (var i=0; i<nodes.length; i++){
@@ -68,25 +85,32 @@ document.addEventListener('DOMContentLoaded', function () {
       targetPage.classList.add(this.dataset.animationin);
       targetPage.classList.add('on-top');
     
-      var onEndAnimationCurrentPage = function(){
+      var onEndAnimationCurrentPage = function(e){
         if (self.dataset.animationout){
           this.classList.remove(self.dataset.animationout);
         }
         this.classList.remove('current');
-        console.log('current ', "animationend");
-        currentPage.removeEventListener("animationend", onEndAnimationCurrentPage);
+        console.log('current ', e.type);
+        currentPage.removeEventListener(e.type, onEndAnimationCurrentPage);
       }
-      var onEndAnimationTargetPage = function(){
+      var onEndAnimationTargetPage = function(e){
          if (self.dataset.animationin){
           this.classList.remove(self.dataset.animationin);
          }
          targetPage.classList.remove('on-top');
-         console.log('target ', "animationend");
-         targetPage.removeEventListener("animationend", onEndAnimationTargetPage);
+         console.log('target ', e.type);
+         targetPage.removeEventListener(e.type, onEndAnimationTargetPage);
       };
-      currentPage.addEventListener("animationend", onEndAnimationCurrentPage, false);
 
+      currentPage.addEventListener("animationend", onEndAnimationCurrentPage, false);
+      currentPage.addEventListener("webkitAnimationEnd", onEndAnimationCurrentPage, false);
+      currentPage.addEventListener("oanimationend", onEndAnimationCurrentPage, false);
+      currentPage.addEventListener("MSAnimationEnd", onEndAnimationCurrentPage, false);
+      
       targetPage.addEventListener("animationend", onEndAnimationTargetPage, false);
+      targetPage.addEventListener("webkitAnimationEnd", onEndAnimationTargetPage, false);
+      targetPage.addEventListener("oanimationend", onEndAnimationTargetPage, false);
+      targetPage.addEventListener("MSAnimationEnd", onEndAnimationTargetPage, false);
     })
   }
 });
