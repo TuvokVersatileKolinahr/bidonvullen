@@ -20,6 +20,10 @@ app.set('view engine', 'hjs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/bidon.ico'));
+
+// we are specifying the html directory as another public directory
+app.use(express.static(path.join(__dirname, 'frontend')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
