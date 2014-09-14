@@ -7,7 +7,8 @@ var tapSchema= new Schema({
     type: String,
     required: true
   },
-  geolocation: [],
+  // geolocation: [],
+  geolocation: {type: [Number], index: '2d'},
   description: {
     type: String,
     required: true
@@ -15,6 +16,7 @@ var tapSchema= new Schema({
   creationDate: {type: Date, 'default': Date.now},
 });
 
-tapSchema.index({ geolocation: '2d' });
+// tapSchema.index({ geolocation: '2d' });
+mongoose.set('debug', true);
 
 module.exports = mongoose.model('Tap', tapSchema);

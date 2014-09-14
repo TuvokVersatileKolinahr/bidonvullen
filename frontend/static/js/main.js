@@ -8,6 +8,16 @@ function getLocation() {
 
 function showPosition(position) {
     initialize(position.coords.latitude, position.coords.longitude);
+    console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
+    locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
+    var rest = new Rest('/api');
+    // get taps for this location
+    rest.get('/api/taps/prox/' + JSON.stringify(locdata), {
+      success: function(data, status, xhr){
+        console.info('Got taps @ 100 meter: ', data);
+      }
+    });
+
 }
 
 function showError(error) {
