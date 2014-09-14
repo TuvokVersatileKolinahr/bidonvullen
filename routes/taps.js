@@ -12,14 +12,18 @@ router.get('/taps/prox/:location', function(req, res) {
   loc = { received: JSON.parse(req.params.location) };
 
   locar = [ loc.received.lat, loc.received.lng ];
-  // 0.00089928057 = 100 m
+  // You need to divide the maxdistance value by 111.12 (one degree is approximately 111.12 kilometers)
+  // to convert the degree redius to km distance.
+  // 0.1 / 111.12 = 0.00089928057 = 100 m
+  // 0.5 / 111.12 = 0.00449964002 = 500 m
+  // 5.5 / 111.12 = 0.04949604031 = 5,5 km
   // find( { geolocation: { "$near": [51.8349786, 5.8863487999999995], "$maxDistance": 0.00089928057 } } )
-  Tap.find({geolocation: { "$near": locar, "$maxDistance": 0.00089928057 }}, function(err, result) {
+  Tap.find({geolocation: { "$near": locar, "$maxDistance": 0.04949604031 }}, function(err, result) {
     if (err) {
       res.status(500);
       res.send(err);
     } else {
-      console.log("res", res);
+      // console.log("res", res);
       res.send({result: result});
     }
   });

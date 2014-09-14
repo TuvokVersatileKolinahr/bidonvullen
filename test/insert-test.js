@@ -5,38 +5,46 @@ var dimsum = require('dimsum').configure({ flavor: 'jabberwocky' });
 
 var app = require('../app.js');
 
-var api_uri = '/taps'
+var api_uri = '/api/taps'
 
 var locations = 
   [
     {
-      name: 'Racine',
+      name: 'De Kroon',
       description: dimsum.sentence(2),
-      geolocation: [51.8344563,5.8866507]
-    },{
-      name: 'Grut',
-      description: dimsum.sentence(2),
-      geolocation: [51.8344563,5.8866507]
-    },{
-      name: 'Zarzuela',
-      description: dimsum.sentence(2),
-      geolocation: [51.8344563,5.8866507]
+      geolocation: [51.8347059,5.8803058]
     },{
       name: 'Baan Isaan',
       description: dimsum.sentence(2),
-      geolocation: [51.8356066,5.8824772]
+      geolocation: [51.8345417,5.8808698]
     },{
-      name: 't Centrum',
+      name: 'Cafe Jos',
       description: dimsum.sentence(2),
-      geolocation: [51.8356066,5.8824772]
+      geolocation: [51.8360986,5.8782752]
+    },{
+      name: 'De Mandarijn',
+      description: dimsum.sentence(2),
+      geolocation: [51.8370332,5.8783289]
+    },{
+      name: 'Het Centrum',
+      description: dimsum.sentence(2),
+      geolocation: [51.836846,5.880097]
     },{
       name: 'The Shuffle',
       description: dimsum.sentence(2),
-      geolocation: [51.8356066,5.8824772]
+      geolocation: [51.8370614,5.8844377]
     },{
-      name: 'Ark van Oost',
+      name: 'Racine',
       description: dimsum.sentence(2),
-      geolocation: [51.8326961,5.8865756]
+      geolocation: [51.836249,5.8852558]
+    },{
+      name: 'Grut',
+      description: dimsum.sentence(2),
+      geolocation: [51.8358791,5.8855854]
+    },{
+      name: 'Kitty',
+      description: dimsum.sentence(2),
+      geolocation: [51.8332951,5.8865869]
     }
   ];
 

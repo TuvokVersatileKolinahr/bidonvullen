@@ -7,7 +7,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    initialize(position.coords.latitude, position.coords.longitude);
+    var map = initialize(position.coords.latitude, position.coords.longitude);
     console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
     locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
     var rest = new Rest('/api');
@@ -15,8 +15,20 @@ function showPosition(position) {
     rest.get('/api/taps/prox/' + JSON.stringify(locdata), {
       success: function(data, status, xhr){
         console.info('Got taps @ 100 meter: ', data);
+        for (var t = 0; t < data.result.length; t++) {
+          console.log("data.result[" + t + "].geolocation[0]", data.result[t].geolocation[0]);
+          console.log("data.result[" + t + "].geolocation[1]", data.result[t].geolocation[1]);
+          console.log("data.result[" + t + "].name", data.result[t].name);
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data.result[t].geolocation[0], data.result[t].geolocation[1]),
+            title: data.result[t].name
+          });
+          console.log("map", map);
+          marker.setMap(map);
+        }
       }
     });
+
 
 }
 
@@ -60,6 +72,7 @@ function initialize(lat, lng) {
   });
   circle.bindTo('center', marker, 'position');
 
+  return map;
 }
 
 function vendorEventName(name, el){
