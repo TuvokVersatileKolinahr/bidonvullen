@@ -95,45 +95,49 @@ document.addEventListener('DOMContentLoaded', function () {
   /*
    * Navigation
    */
-  var nodes;
+  var nodes,
+  nodeClickedHandler = function(e){
+    e.preventDefault();
+    var currentPage = document.querySelector('.page.current');
+    var targetPage = document.getElementById(this.dataset.target);
+    var self = this;
+
+    currentPage.classList.add(this.dataset.animationout);
+    targetPage.classList.add('current');
+    targetPage.classList.add(this.dataset.animationin);
+    targetPage.classList.add('on-top');
+  
+    var onEndAnimationCurrentPage = function(e){
+      if (self.dataset.animationout){
+        this.classList.remove(self.dataset.animationout);
+      }
+      this.classList.remove('current');
+      console.log('current ', e.type);
+      currentPage.removeEventListener(e.type, onEndAnimationCurrentPage);
+    }
+    var onEndAnimationTargetPage = function(e){
+       if (self.dataset.animationin){
+        this.classList.remove(self.dataset.animationin);
+       }
+       targetPage.classList.remove('on-top');
+       console.log('target ', e.type);
+       targetPage.removeEventListener(e.type, onEndAnimationTargetPage);
+    };
+
+    currentPage.addEventListener("animationend", onEndAnimationCurrentPage, false);
+    currentPage.addEventListener("webkitAnimationEnd", onEndAnimationCurrentPage, false);
+    currentPage.addEventListener("oanimationend", onEndAnimationCurrentPage, false);
+    currentPage.addEventListener("MSAnimationEnd", onEndAnimationCurrentPage, false);
+    
+    targetPage.addEventListener("animationend", onEndAnimationTargetPage, false);
+    targetPage.addEventListener("webkitAnimationEnd", onEndAnimationTargetPage, false);
+    targetPage.addEventListener("oanimationend", onEndAnimationTargetPage, false);
+    targetPage.addEventListener("MSAnimationEnd", onEndAnimationTargetPage, false);
+  };
+    
   nodes = document.querySelectorAll('.navigation');
   for (var i=0; i<nodes.length; i++){
-    nodes[i].addEventListener('click', function(){
-      var currentPage = document.querySelector('.page.current');
-      var targetPage = document.getElementById(this.dataset.target);
-      var self = this;
-
-      currentPage.classList.add(this.dataset.animationout);
-      targetPage.classList.add('current');
-      targetPage.classList.add(this.dataset.animationin);
-      targetPage.classList.add('on-top');
-    
-      var onEndAnimationCurrentPage = function(e){
-        if (self.dataset.animationout){
-          this.classList.remove(self.dataset.animationout);
-        }
-        this.classList.remove('current');
-        console.log('current ', e.type);
-        currentPage.removeEventListener(e.type, onEndAnimationCurrentPage);
-      }
-      var onEndAnimationTargetPage = function(e){
-         if (self.dataset.animationin){
-          this.classList.remove(self.dataset.animationin);
-         }
-         targetPage.classList.remove('on-top');
-         console.log('target ', e.type);
-         targetPage.removeEventListener(e.type, onEndAnimationTargetPage);
-      };
-
-      currentPage.addEventListener("animationend", onEndAnimationCurrentPage, false);
-      currentPage.addEventListener("webkitAnimationEnd", onEndAnimationCurrentPage, false);
-      currentPage.addEventListener("oanimationend", onEndAnimationCurrentPage, false);
-      currentPage.addEventListener("MSAnimationEnd", onEndAnimationCurrentPage, false);
-      
-      targetPage.addEventListener("animationend", onEndAnimationTargetPage, false);
-      targetPage.addEventListener("webkitAnimationEnd", onEndAnimationTargetPage, false);
-      targetPage.addEventListener("oanimationend", onEndAnimationTargetPage, false);
-      targetPage.addEventListener("MSAnimationEnd", onEndAnimationTargetPage, false);
-    })
+    nodes[i].addEventListener('touchstart', nodeClickedHandler, false);
+    nodes[i].addEventListener('mousedown', nodeClickedHandler, false);
   }
 });
