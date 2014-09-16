@@ -10,9 +10,10 @@ function showPosition(position) {
     var map = initialize(position.coords.latitude, position.coords.longitude);
     console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
     locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
-    var rest = new Rest('/api');
+    var rest = new Rest();
     // get taps for this location
-    rest.get('/api/taps/prox/' + JSON.stringify(locdata), {
+    var url = (window.location.href.match(/localhost/) ? 'http://bidonvullen.tuvok.nl' : "") + '/api/taps/prox/';
+    rest.get(url + JSON.stringify(locdata), {
       success: function(data, status, xhr){
         console.info('Got taps @ 100 meter: ', data);
         for (var t = 0; t < data.result.length; t++) {
@@ -28,8 +29,6 @@ function showPosition(position) {
         }
       }
     });
-
-
 }
 
 function showError(error) {
@@ -73,20 +72,6 @@ function initialize(lat, lng) {
   circle.bindTo('center', marker, 'position');
 
   return map;
-}
-
-function vendorEventName(name, el){
-  var vendor = ["webkit", "moz", "MS", "o", ""];
-  if (!el){el=document.documentElement}
-  if(name.toLowerCase() in el){return name.toLowerCase();}
-  for (var i = 0; i < vendor.length; i++) {
-    if (vendor[i]+name in el){
-      return vendor[i]+name;
-    }else if (vendor[i]+name.toLowerCase() in el){
-      return vendor[i]+name.toLowerCase();
-    }
-  }
-  throw "Event " + name + " is not supported for element " + el.tagName;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
