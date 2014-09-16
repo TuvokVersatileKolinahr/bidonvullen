@@ -39,9 +39,7 @@ body{
     perspective: 1200px;
     transform-style: preserve-3d;
 }
-#main{
-  background-color:#FFCAB4;
-}
+
 #picture{
   background-color: #DD87CD;
 }
@@ -168,20 +166,33 @@ from { }
 
 
 h1.app-title{
+  border-bottom: 1px solid #333;
   font-size: 2em;
   margin-bottom: 5px;
 }
-h1.app-title span{
-  border-bottom: 1px solid #333;
+/**
+ * Main Page
+ */
+#main{
+  background-color:#D2E4C8;
 }
 .google-map{
-  height: 310px;
+  height: 360px;
   margin-bottom: 5px;
   width: 100%;
 }
-h2.found-a-place {
-  font-size: 1.4em;
-  margin-bottom: 10px;
+
+
+/**
+ * Picture page
+ */
+.take-picture{
+  background: transparent url('img/camera.png') no-repeat center center;
+  background-size: 64px;
+  cursor: pointer;
+  height: 64px;
+  margin: 0 auto;
+  width: 64px;
 }
 
 .button{

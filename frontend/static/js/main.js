@@ -125,4 +125,36 @@ document.addEventListener('DOMContentLoaded', function () {
     nodes[i].addEventListener('touchstart', nodeClickedHandler, false);
     nodes[i].addEventListener('mousedown', nodeClickedHandler, false);
   }
+
+  // take photo
+  var takePicture = function(e){
+    e.preventDefault();
+    document.querySelector('.toggle-camera').click();
+  };
+
+
+  
+  document.querySelector('.toggle-camera').addEventListener('change', function(e){
+    e.preventDefault();
+    function base64Encode( buffer ) {
+        var binary = '',
+        bytes = new Uint8Array( buffer ),
+        len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    };
+    var reader = new FileReader(),
+    input = document.querySelector('.toggle-camera'),
+    file = input.files[0];
+    reader.onloadend = function(e) {
+      var dataURL =  'data:'+file.type+';base64,'+base64Encode(e.target.result);
+      document.querySelector('.pic-taken').src = dataURL;
+      document.querySelector('.goto-picture').dispatchEvent(new CustomEvent('touchstart'));
+    };
+      reader.readAsArrayBuffer(file);
+    }, false);
+ document.querySelector('.take-picture').addEventListener('touchstart', takePicture, false);
+ document.querySelector('.take-picture').addEventListener('mousedown', takePicture, false);
 });
