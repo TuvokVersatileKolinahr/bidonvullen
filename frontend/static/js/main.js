@@ -66,7 +66,7 @@ function initialize(lat, lng) {
   var circle = new google.maps.Circle({
     map: map,
     radius: 400,
-    fillColor: '#fc4c02',
+    fillColor: '#d2e4c8',
     strokeWeight: 0
   });
   circle.bindTo('center', marker, 'position');
