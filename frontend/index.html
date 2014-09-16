@@ -7,32 +7,35 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link href="static/css/main.css" rel="stylesheet">
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMFGTIvS385CKvB7J8FC5cBala85M9FLQ">
-    </script>
+    	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMFGTIvS385CKvB7J8FC5cBala85M9FLQ"></script>
 	</head>
 	<body>
 
 	<div class="page-container">
+
 			<section id="main" class="page current">
 
 				<h1 class="app-title"><span>Bidon vullen<span></h1>
 				<div id="map-canvas" class="google-map"></div>
-				
-				<div class="center">
-					<h2 class="found-a-place">Found a place</h2>
-					<button class="button navigation" data-target="picture" data-animationout="toLeft" data-animationin="fromRight">Add new place</button>
-				</div>
+				<div class="take-picture"></div>
+				<input type="file" class="toggle-camera hidden" />
+				<button class="goto-picture navigation" data-target="picture" data-animationout="toLeft" data-animationin="fromRight"></button>
 
 			</section>
+
 
 			<section class="page" id="picture">
 				<h1 class="app-title"><span>Add Picture<span></h1>
 
 				<div class="center">
+					<img class="pic-taken" />
+				</div>
+
+				<div class="center">
 					<button class="button navigation" data-target="description" data-animationout="toLeft" data-animationin="fromRight">Next page</button>
 				</div>
 			</section>
+
 
 			<section id="description" class="page">
 				<h1 class="app-title"><span>Description<span></h1>
@@ -42,6 +45,7 @@
 				</div>
 			</section>
 
+
 			<section id="availability" class="page">
 				<h1 class="app-title"><span>Availablitity<span></h1>
 
@@ -49,6 +53,7 @@
 					<button class="button navigation" data-target="details" data-animationout="toLeft" data-animationin="fromRight">Next page</button>
 				</div>
 			</section>
+
 
 			<section id="details" class="page">
 				<h1 class="app-title"><span>Details<span></h1>
@@ -58,9 +63,9 @@
 				</div>
 			</section>
 
+
 		</div>
 		<script src="static/js/vendor/Rest.js"></script>
-		<script src="static/js/vendor/Webcam.js"></script>
 		<script src="static/js/main.js"></script>
 	</body>
 </html>
