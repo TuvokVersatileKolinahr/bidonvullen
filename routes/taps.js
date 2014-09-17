@@ -18,7 +18,7 @@ router.get('/taps/prox/:location', function(req, res) {
   // 0.5 / 111.12 = 0.00449964002 = 500 m
   // 5.5 / 111.12 = 0.04949604031 = 5,5 km
   // find( { geolocation: { "$near": [51.8349786, 5.8863487999999995], "$maxDistance": 0.00089928057 } } )
-  Tap.find({geolocation: { "$near": locar, "$maxDistance": 0.04949604031 }}, function(err, result) {
+  Tap.find({geolocation: { "$near": locar, "$maxDistance": 0.00449964002 }}, function(err, result) {
     if (err) {
       res.status(500);
       res.send(err);

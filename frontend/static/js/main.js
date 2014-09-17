@@ -8,29 +8,32 @@ function getLocation() {
 
 function showPosition(position) {
     var map = initialize(position.coords.latitude, position.coords.longitude);
-    console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
+    // console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
     locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
-    var rest = new Rest();
+    drawNearbyTaps(map, locdata);
+}
+
+function drawNearbyTaps (map, locdata) {
+      var rest = new Rest();
     // get taps for this location
     var url = (window.location.href.match(/localhost/) ? 'http://bidonvullen.tuvok.nl' : "") + '/api/taps/prox/';
     rest.get(url + JSON.stringify(locdata), {
       success: function(data, status, xhr){
-        console.info('Got taps @ 100 meter: ', data);
+        // console.info('Got taps @ 100 meter: ', data);
         for (var t = 0; t < data.result.length; t++) {
-          console.log("data.result[" + t + "].geolocation[0]", data.result[t].geolocation[0]);
-          console.log("data.result[" + t + "].geolocation[1]", data.result[t].geolocation[1]);
-          console.log("data.result[" + t + "].name", data.result[t].name);
+          // console.log("data.result[" + t + "].geolocation[0]", data.result[t].geolocation[0]);
+          // console.log("data.result[" + t + "].geolocation[1]", data.result[t].geolocation[1]);
+          // console.log("data.result[" + t + "].name", data.result[t].name);
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(data.result[t].geolocation[0], data.result[t].geolocation[1]),
             title: data.result[t].name
           });
-          console.log("map", map);
+          // console.log("map", map);
           marker.setMap(map);
         }
       }
     });
 }
-
 function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
@@ -70,6 +73,14 @@ function initialize(lat, lng) {
     strokeWeight: 0
   });
   circle.bindTo('center', marker, 'position');
+
+  google.maps.event.addListener(map, 'center_changed', function() {
+    marker.setPosition(new google.maps.LatLng(map.getCenter().k, map.getCenter().B));
+  });
+  google.maps.event.addListener(map, 'dragend', function() {
+    locdata = {lat: map.getCenter().k, lng: map.getCenter().B};
+    drawNearbyTaps(map, locdata);
+  });
 
   return map;
 }
