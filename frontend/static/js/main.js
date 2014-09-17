@@ -14,7 +14,8 @@ function showPosition(position) {
 }
 
 function drawNearbyTaps (map, locdata) {
-      var rest = new Rest();
+    var rest = new Rest();
+    var image = 'static/css/img/tap-20x20.png';
     // get taps for this location
     var url = (window.location.href.match(/localhost/) ? 'http://bidonvullen.tuvok.nl' : "") + '/api/taps/prox/';
     rest.get(url + JSON.stringify(locdata), {
@@ -26,10 +27,12 @@ function drawNearbyTaps (map, locdata) {
           // console.log("data.result[" + t + "].name", data.result[t].name);
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(data.result[t].geolocation[0], data.result[t].geolocation[1]),
-            title: data.result[t].name
+            title: data.result[t].name,
+            map: map,
+            icon: image
           });
           // console.log("map", map);
-          marker.setMap(map);
+          // marker.setMap(map);
         }
       }
     });
@@ -58,11 +61,21 @@ function initialize(lat, lng) {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
-  // Create marker 
-  var marker = new google.maps.Marker({
+  var image = 'static/css/img/here_pin.png';
+  // Create marker to show the current location 
+  var heremarker = new google.maps.Marker({
     map: map,
     position: new google.maps.LatLng(lat, lng),
-    title: 'U bent hier'
+    title: 'U bent hier',
+    icon: image
+  });
+
+  // Create marker as center of the circle
+  var empty = 'static/css/img/empty.png';
+  var circlemarker = new google.maps.Marker({
+    map: map,
+    position: new google.maps.LatLng(lat, lng),
+    icon: empty
   });
 
   // Add circle overlay and bind to marker
@@ -72,10 +85,10 @@ function initialize(lat, lng) {
     fillColor: '#333',
     strokeWeight: 0
   });
-  circle.bindTo('center', marker, 'position');
+  circle.bindTo('center', circlemarker, 'position');
 
   google.maps.event.addListener(map, 'center_changed', function() {
-    marker.setPosition(new google.maps.LatLng(map.getCenter().k, map.getCenter().B));
+    circlemarker.setPosition(new google.maps.LatLng(map.getCenter().k, map.getCenter().B));
   });
   google.maps.event.addListener(map, 'dragend', function() {
     locdata = {lat: map.getCenter().k, lng: map.getCenter().B};
