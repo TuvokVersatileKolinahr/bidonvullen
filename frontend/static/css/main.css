@@ -203,6 +203,8 @@ h1.app-title{
   position: absolute;
   top: -36px;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   width: 64px;
 }
 

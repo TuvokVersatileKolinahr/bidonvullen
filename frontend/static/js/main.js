@@ -1,105 +1,13 @@
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-  } else { 
-    console.error("Geolocation is not supported by this browser.");
-  }
-}
 
-function showPosition(position) {
-    var map = initialize(position.coords.latitude, position.coords.longitude);
-    // console.log("position.coords.latitude: %s - position.coords.longitude: %s", position.coords.latitude, position.coords.longitude);
-    locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
-    drawNearbyTaps(map, locdata);
-}
 
-function drawNearbyTaps (map, locdata) {
-    var rest = new Rest();
-    var image = 'static/css/img/tap-20x20.png';
-    // get taps for this location
-    var url = (window.location.href.match(/localhost/) ? 'http://bidonvullen.tuvok.nl' : "") + '/api/taps/prox/';
-    rest.get(url + JSON.stringify(locdata), {
-      success: function(data, status, xhr){
-        // console.info('Got taps @ 100 meter: ', data);
-        for (var t = 0; t < data.result.length; t++) {
-          // console.log("data.result[" + t + "].geolocation[0]", data.result[t].geolocation[0]);
-          // console.log("data.result[" + t + "].geolocation[1]", data.result[t].geolocation[1]);
-          // console.log("data.result[" + t + "].name", data.result[t].name);
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(data.result[t].geolocation[0], data.result[t].geolocation[1]),
-            title: data.result[t].name,
-            map: map,
-            icon: image
-          });
-          // console.log("map", map);
-          // marker.setMap(map);
-        }
-      }
-    });
-}
-function showError(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      console.error("User denied the request for Geolocation.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-     console.error("Location information is unavailable.");
-      break;
-    case error.TIMEOUT:
-      console.error("The request to get user location timed out.");
-      break;
-    case error.UNKNOWN_ERROR:
-      console.error("An unknown error occurred.");
-      break;
-  }
-}
-
-function initialize(lat, lng) {
-  var mapOptions = {
-    center: new google.maps.LatLng(lat, lng),
-    zoom: 15
-  };
-  var map = new google.maps.Map(document.getElementById("map-canvas"),
-      mapOptions);
-  var image = 'static/css/img/here_pin.png';
-  // Create marker to show the current location 
-  var heremarker = new google.maps.Marker({
-    map: map,
-    position: new google.maps.LatLng(lat, lng),
-    title: 'U bent hier',
-    icon: image
-  });
-
-  // Create marker as center of the circle
-  var empty = 'static/css/img/empty.png';
-  var circlemarker = new google.maps.Marker({
-    map: map,
-    position: new google.maps.LatLng(lat, lng),
-    icon: empty
-  });
-
-  // Add circle overlay and bind to marker
-  var circle = new google.maps.Circle({
-    map: map,
-    radius: 400,
-    fillColor: '#333',
-    strokeWeight: 0
-  });
-  circle.bindTo('center', circlemarker, 'position');
-
-  google.maps.event.addListener(map, 'center_changed', function() {
-    circlemarker.setPosition(new google.maps.LatLng(map.getCenter().k, map.getCenter().B));
-  });
-  google.maps.event.addListener(map, 'dragend', function() {
-    locdata = {lat: map.getCenter().k, lng: map.getCenter().B};
-    drawNearbyTaps(map, locdata);
-  });
-
-  return map;
-}
 
 document.addEventListener('DOMContentLoaded', function () {
-  getLocation();
+  var map = new Maps();
+  setInterval(function(){
+    map.getLocation(map.showPosition,map.showError );
+    console.log('update position');
+  }, 2000);
+
 
   /*
    * Navigation
@@ -184,3 +92,104 @@ document.addEventListener('DOMContentLoaded', function () {
  document.querySelector('.take-picture').addEventListener('touchstart', takePicture, false);
  document.querySelector('.take-picture').addEventListener('mousedown', takePicture, false);
 });
+
+
+var Maps = function(){
+  var map, heremarker, currentLocData,
+  drawNearbyTaps = function(map, locdata) {
+      var rest = new Rest();
+      var image = 'static/css/img/tap-20x20.png';
+      // get taps for this location
+      var url = (window.location.href.match(/localhost/) ? 'http://bidonvullen.tuvok.nl' : "") + '/api/taps/prox/';
+      rest.get(url + JSON.stringify(locdata), {
+        success: function(data, status, xhr){
+          for (var t = 0; t < data.result.length; t++) {
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(data.result[t].geolocation[0], data.result[t].geolocation[1]),
+              title: data.result[t].name,
+              map: map,
+              icon: image
+            });
+          }
+        }
+      });
+  },
+  showError = function(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        console.error("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+       console.error("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        console.error("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        console.error("An unknown error occurred.");
+        break;
+    }
+  },
+  getLocation = function(success, failure) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, failure);
+    } else { 
+      console.error("Geolocation is not supported by this browser.");
+    }
+  },
+  showPosition = function(position) {
+      locdata = {lat: position.coords.latitude, lng: position.coords.longitude};
+      if (!currentLocData || currentLocData.lat != locdata.lat || currentLocData.lng != locdata.lng){
+        currentLocData = locdata;
+        drawNearbyTaps(map, currentLocData);
+      }
+  },
+  initialize = function() {
+    getLocation(function(position){
+          var lat = position.coords.latitude,
+          lng = position.coords.longitude
+          mapOptions = {
+            center: new google.maps.LatLng(lat, lng),
+            zoom: 15
+          },
+          map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions),
+        heremarker = new google.maps.Marker({
+          map: map,
+          position: new google.maps.LatLng(lat, lng),
+          title: 'U bent hier',
+          icon: 'static/css/img/here_pin.png'
+        }),
+        circlemarker = new google.maps.Marker({
+          map: map,
+          position: new google.maps.LatLng(lat, lng),
+          icon: 'static/css/img/empty.png'
+        }),
+        circle = new google.maps.Circle({
+          map: map,
+          radius: 400,
+          fillColor: '#333',
+          strokeWeight: 0
+        });
+
+      circle.bindTo('center', circlemarker, 'position');
+
+      showPosition( position);
+
+      google.maps.event.addListener(map, 'center_changed', function() {
+        circlemarker.setPosition(new google.maps.LatLng(map.getCenter().k, map.getCenter().B));
+      });
+      google.maps.event.addListener(map, 'dragend', function() {
+        locdata = {lat: map.getCenter().k, lng: map.getCenter().B};
+        drawNearbyTaps(map,  locdata);
+      });
+    }, showError);
+  }
+
+  initialize();
+
+  return {
+    getLocation  : getLocation,
+    showPosition : showPosition,
+    showError    : showError
+  }
+};
