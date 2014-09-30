@@ -16,14 +16,13 @@ input,select{vertical-align:middle}
 img{max-width:100%;}
 
 @font-face {
-    font-family: "Open Sans";
-    src: local("Open Sans Light"), local("OpenSans-Light"), url("fonts/OpenSans-Light.woff") format("woff");
+  font-family: "Open Sans";
+  src: local("Open Sans Light"), local("OpenSans-Light"), url("fonts/OpenSans-Light.woff") format("woff");
 }
 body, textarea, select{
   color: #333;
 	font: 1em "Open Sans",Helvetica,Arial,sans-serif;
 }
-
 html, body, .page{
   height: 100%;
   overflow: hidden;
@@ -34,15 +33,26 @@ body{
 }
 .page-container{
   position: relative;
-    width: 100%;
-    height: 100%;
-    perspective: 1200px;
-    transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
-
 #picture{
   background-color: #DD87CD;
+  height: 50%;
+  position: absolute;
+  top: 100%;
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+  z-index: 10000001;
 }
+#picture.show{
+  -webkit-animation: moveToTop .6s cubic-bezier(.67,.1,.12,1.32) both;
+  animation: moveToTop .6s cubic-bezier(.67,.1,.12,1.32) both;
+  z-index: 101;
+}
+
 #description{
   background-color:#87DD8A;
 }
@@ -54,16 +64,16 @@ body{
 }
 .page{
   width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    overflow: hidden;
-    backface-visibility: hidden;
-    transform: translate3d(0, 0, 0);
-    width: 100%;
-    height: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+  height: 100%;
 }
 .page.current{
   visibility: visible;
@@ -163,8 +173,6 @@ from { }
   from { -webkit-transform: translateY(100%); transform: translateY(100%); }
 }
 
-
-
 h1.app-title{
   border-bottom: 1px solid #333;
   font-size: 2em;
@@ -177,8 +185,7 @@ h1.app-title{
   background-color:#D2E4C8;
 }
 .google-map{
-  height: 360px;
-  margin-bottom: 5px;
+  height: 100%;
   width: 100%;
 }
 
@@ -190,8 +197,12 @@ h1.app-title{
   background: transparent url('img/camera.png') no-repeat center center;
   background-size: 64px;
   cursor: pointer;
-  height: 64px;
+  height: 66px;
+  left: 50%;
   margin: 0 auto;
+  position: absolute;
+  top: -36px;
+  transform: translateX(-50%);
   width: 64px;
 }
 

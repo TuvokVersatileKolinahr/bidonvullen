@@ -153,7 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // take photo
   var takePicture = function(e){
     e.preventDefault();
-    document.querySelector('.toggle-camera').click();
+
+    document.getElementById('picture').classList.toggle('show');
+    //document.querySelector('.toggle-camera').click();
   };
 
 
