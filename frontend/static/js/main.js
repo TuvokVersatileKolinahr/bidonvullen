@@ -1,6 +1,4 @@
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
   var map = new Maps();
   setInterval(function(){
