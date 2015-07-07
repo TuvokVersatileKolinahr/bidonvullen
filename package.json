@@ -11,14 +11,20 @@
     "type": "git",
     "url": "https://github.com/TuvokVersatileKolinahr/bidonvullen/"
   },
-  "author": {
-    "name": "Elger van Boxtel",
-    "email": "elgervb@gmail.com",
-    "url": "http://elgervanboxtel.nl"
-  },
+  "author": [
+    {
+      "name": "Elger van Boxtel",
+      "email": "elgervb@gmail.com",
+      "url": "http://elgervanboxtel.nl"
+    },
+    {
+      "name": "Wouter Roosendaal",
+      "email": "tuvokki@gmail.com",
+      "url": "http://www.wouterroosendaal.nl"
+    }
+  ],
   "bugs": {
-    "url": "https://github.com/TuvokVersatileKolinahr/bidonvullen/issues",
-    "email": "elgervb@gmail.com"
+    "url": "https://github.com/TuvokVersatileKolinahr/bidonvullen/issues"
   },
   "settings": {
     "src": "./src/",
@@ -27,7 +33,7 @@
     "tests": "./tests/",
     "serverport": 4000
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^1.9.1",
     "del": "^1.0.0",
