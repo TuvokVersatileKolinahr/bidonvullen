@@ -9,11 +9,14 @@ var app = angular.module('bidonvullen', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
   
   $routeProvider
+    .when('/add', {
+      controller: 'AddController',
+      templateUrl: '/js/app/modules/add/add.html'
+    })
     .otherwise({
       controller: 'MainController',
       templateUrl: '/js/app/modules/main/main.html'
     });
 
   $locationProvider.html5Mode('true');
-
 });

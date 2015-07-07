@@ -9,7 +9,8 @@
     
     "globals"   : {  // Custom globals.
         "angular": true,
-        "app": true
+        "app": true,
+        "Webcam": true
     },
 
     // Development.

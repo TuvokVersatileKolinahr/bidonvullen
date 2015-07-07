@@ -1,0 +1,14 @@
+	
+
+  <h2>voeg een punt toe</h2>
+
+
+  <div>
+
+    <button id="start" ng-show="isSupported()" ng-click="startWebcam()">Start</button>
+    <button id="stop" ng-show="isSupported()" ng-click="stopWebcam()">Stop</button>
+    <button id="picture" ng-click="takePicture()" >Take picture</button>
+    <video id="video" autoplay ></video>
+    <img id="image" ng-src="{{picture}}" >
+    
+  </div>

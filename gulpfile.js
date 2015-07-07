@@ -27,7 +27,7 @@ gulp.task('browser-sync', ['watch'], function() {
   var browserSync = require('browser-sync');
 
   // Watch any files in dist/*, reload on change
-  gulp.watch([settings.dist + '**']).on('change', function(){browserSync.reload({});notify({ message: 'Reload browser' });});
+  gulp.watch([settings.dist + '**']).on('change', function(){browserSync.reload({});});
 
   return browserSync({
       server: {
