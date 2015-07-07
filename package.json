@@ -1,25 +1,15 @@
 {
   "name": "bidonvullen",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "test": "mocha",
-    "start": "node ./bin/service"
+    "start": "node app.js"
   },
   "dependencies": {
-    "express": "~4.8.6",
-    "body-parser": "~1.6.6",
-    "cookie-parser": "~1.3.2",
-    "morgan": "~1.2.3",
-    "serve-favicon": "~2.0.1",
-    "hjs": "~0.0.6",
-    "mongoose": "3.6.x"
   },
   "devDependencies": {
-    "debug": "~1.0.4",
     "mocha": "1.11.0",
-    "supertest": "0.7.0",
-    "dimsum": "^0.1.8",
     "should": "^4.0.4"
   }
 }

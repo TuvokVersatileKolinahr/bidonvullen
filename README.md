@@ -11,9 +11,12 @@ bidonvullen
 
     npm install
 
+    npm start
+
 ### Running tests ###
 
     cd bidonvullen
-    mocha
+
+    npm test
 
 Open the app on a mobile.
