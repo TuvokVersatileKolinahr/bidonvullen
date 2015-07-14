@@ -85,7 +85,23 @@ gulp.task('clear-cache', function() {
 /**
  * Copies all to dist/
  */
-gulp.task('copy', ['copy-fonts', 'copy-template', 'copy-index'], function() {});
+gulp.task('copy', ['copy-fonts', 'copy-template', 'copy-index', 'copy-requirements'], function() {});
+
+
+/**
+ * Task for copying server requirements
+ */
+gulp.task('copy-requirements', function() {
+  var deferred = q.defer();
+   // copy all fonts
+   setTimeout(function() {
+    gulp.src( settings.src + 'javascript/**')
+      .pipe(gulp.dest(settings.dist + 'javascript'));
+       deferred.resolve();
+  }, 1);
+
+  return deferred.promise;
+});
 
 
 /**
