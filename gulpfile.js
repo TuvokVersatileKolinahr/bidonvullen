@@ -226,9 +226,19 @@ gulp.task('list', function() {
 gulp.task('info',function(){
   // log project details
   gutil.log( gutil.colors.cyan("Running gulp on project "+config.name+" v"+ config.version) );
-  gutil.log( gutil.colors.cyan("Author: " + config.author.name) );
-  gutil.log( gutil.colors.cyan("Email : " + config.author.email) );
-  gutil.log( gutil.colors.cyan("Site  : " + config.author.url) );
+
+  if (config.author instanceof Array) {
+    gutil.log( gutil.colors.cyan("Authors: ") );
+    for (var i = 0; i < config.author.length; i++) {
+      gutil.log( gutil.colors.cyan("\tName: " + config.author[i].name) );
+      gutil.log( gutil.colors.cyan("\tEmail : " + config.author[i].email) );
+      gutil.log( gutil.colors.cyan("\tSite  : " + config.author[i].url) );
+    }
+  } else {
+    gutil.log( gutil.colors.cyan("Author: " + config.author.name) );
+    gutil.log( gutil.colors.cyan("Email : " + config.author.email) );
+    gutil.log( gutil.colors.cyan("Site  : " + config.author.url) );
+  }
   // log info
   gutil.log("If you have an enhancement or encounter a bug, please report them on", gutil.colors.magenta(config.bugs.url));
 });
