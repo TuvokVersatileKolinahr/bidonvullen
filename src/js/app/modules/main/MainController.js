@@ -17,7 +17,7 @@ app.controller('MainController', function($scope) {
       mapTypeControl: true,
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: google.maps.ControlPosition.BOTTOM_CENTER
+        position: google.maps.ControlPosition.RIGHT_BOTTOM
       },
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP // Or: google.maps.MapTypeId.TERRAIN

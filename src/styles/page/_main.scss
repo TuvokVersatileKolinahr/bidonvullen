@@ -1,13 +1,16 @@
 
 .navbar{
   background: $orange-transparent;
+  border-bottom: 2px solid $orange;
+  box-shadow: 0 0 10px $orange-transparent;
   color: $white;
   position: fixed;
   width: 100%;
   z-index: 2;
 
   h1{
-    padding: 1rem 0;
+    font-size: 1.8em;
+    padding: .5rem 0;
     text-align: center;
   }
 }
@@ -18,4 +21,20 @@
   position: absolute;
   top:0;
   width: 100%;
+}
+
+.btn-add{
+  background-color: $orange-transparent;
+  border: 1px solid $orange;
+  border-radius: 50%;
+  bottom: .2rem;
+  color: $white;
+  font-size: 1.6em;
+  height: 1.5em;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 1.5em;
+  z-index: 3;
 }
