@@ -288,7 +288,7 @@ gulp.task('scripts-app', ['docs-js'], function() {
       uglify = require('gulp-uglify');
 
   return gulp.src(settings.src + 'js/app/**/*.js')
-    .pipe(plumber())
+    .pipe(plumber(settings.plumberConfig())
     .pipe(jscs({
       preset: "node-style-guide", 
       verbose: true,
@@ -466,10 +466,6 @@ gulp.task('watch:test', function(done) {
 
 
 function onError(error){
-  // TODO log error with gutil
-  notify.onError(function (error) {
-    gutil.log(error);
-    return error.message;
-  });
+  gutil.log(error);
   this.emit('end');
 }
