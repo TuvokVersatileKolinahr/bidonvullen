@@ -22,7 +22,7 @@
   },
   "settings": {
     "src": "./src/",
-    "dist": "./dist/",
+    "dist": "./public/",
     "reports": "./reports/",
     "tests": "./tests/",
     "serverport": 4000
