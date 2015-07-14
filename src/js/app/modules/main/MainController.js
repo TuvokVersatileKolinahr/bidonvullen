@@ -1,13 +1,13 @@
 /**
  * Main controller
  */
-app.controller('MainController', ['$scope', function($scope) {
+app.controller('MainController', function($scope) {
 
   // Show the map on screen with the right location
   function showMap() {
     // Google map options
     var mapOptions = {
-      center: new google.maps.LatLng($scope.currentPosition.coords.latitude, $scope.currentPosition.coords.longitude),
+      center: new google.maps.LatLng($scope.currentLocation.coords.latitude, $scope.currentLocation.coords.longitude),
       zoom: 16,
       panControl: false,
       zoomControlOptions: {
@@ -26,23 +26,28 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
 
-  // Defaults to Nijmegen, Gelderland, The Netherlands
-  $scope.currentPositon = {
+  function showMapOnCurrentLocation() {
+    // Get current location
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        $scope.currentLocation = position;
+        showMap();
+      }, function(err) { // PERMISSION_DENIED (1) || POSITION_UNAVAILABLE (2) || TIMEOUT (3)
+        showMap();
+      });
+    } else {
+      console.log('geolocation API not supported. Focus on last know position.');
+      showMap();
+    }
+  }
+
+  // Current position, defaults to Nijmegen, Gelderland, The Netherlands
+  $scope.currentLocation = {
     coords: {
       latitude: 51.84520017,
       longitude: 5.83402263
     }
   };
 
-  // Get current location
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      $scope.currentPosition = position;
-      showMap();
-    });
-  } else {
-    console.log("geolocation API not supported. Focus on last know position ");
-    showMap(); // No current position, focus on last know position
-  }
-
-}]);
+  showMapOnCurrentLocation()
+});
