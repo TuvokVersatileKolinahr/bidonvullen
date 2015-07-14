@@ -25,7 +25,7 @@ var settings = config.settings;
  */
 gulp.task('browser-sync', ['watch'], function() {
   var browserSync = require('browser-sync'),
-  port = argv.port||settings.serverport;
+  port = argv.port||settings.developmentport;
 
   // Watch any files in dist/*, reload on change
   gulp.watch([settings.dist + '**']).on('change', function(){browserSync.reload({});});
@@ -380,7 +380,7 @@ gulp.task('scripts-vendor-maps', function(){
 gulp.task('server', function(){
   var express = require('express'),
   app = express(), 
-  port = argv.port||settings.serverport;
+  port = argv.port||settings.developmentport;
   app.use(express.static(__dirname + "/" + settings.dist));
 
   app.listen(port); 

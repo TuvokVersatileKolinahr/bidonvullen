@@ -29,7 +29,8 @@
     "dist": "./public/",
     "reports": "./reports/",
     "tests": "./tests/",
-    "serverport": 4000
+    "developmentport": 4000,
+    "productionport": 7192
   },
   "license": "ISC",
   "engines": {
