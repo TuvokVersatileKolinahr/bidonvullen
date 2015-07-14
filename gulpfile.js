@@ -304,7 +304,7 @@ gulp.task('scripts-app', ['docs-js'], function() {
       uglify = require('gulp-uglify');
 
   return gulp.src(settings.src + 'js/app/**/*.js')
-    .pipe(plumber(settings.plumberConfig())
+    .pipe(plumber(settings.plumberConfig()))
     .pipe(jscs({
       preset: "node-style-guide", 
       verbose: true,
