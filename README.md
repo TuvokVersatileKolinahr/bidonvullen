@@ -9,13 +9,19 @@ bidonvullen
 
     cd bidonvullen
 
+### Running Production ###
+
     npm install
 
     npm start
 
-### Running tests ###
+### Running Development ###
+    
+    gulp
 
-    cd bidonvullen
+    gulp browser-sync
+
+### Running tests ###
 
     npm test
 
