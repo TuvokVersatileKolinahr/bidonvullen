@@ -253,7 +253,7 @@ gulp.task('package', function(cb) {
 
   return gulp.src([settings.dist+'**'], { base: settings.dist })
   .pipe(zip(fileName))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('.'));
 });
 
 
