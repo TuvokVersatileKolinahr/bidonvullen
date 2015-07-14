@@ -120,7 +120,7 @@ gulp.task('copy-template', function() {
       collapseWhitespace: false, 
       removeComments: true,
     }))
-    .pipe(cache(gulp.dest('dist/js/app')));
+    .pipe(cache(gulp.dest(settings.dist + '/js/app')));
 });
 
 /**
@@ -251,7 +251,7 @@ gulp.task('package', function(cb) {
 
   del(settings.dist+fileName);
 
-  return gulp.src([settings.dist+'**'], { base: './dist' })
+  return gulp.src([settings.dist+'**'], { base: settings.dist })
   .pipe(zip(fileName))
   .pipe(gulp.dest('dist'));
 });
