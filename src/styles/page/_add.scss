@@ -1,0 +1,36 @@
+.add-point{
+  background: $orange;
+  color: $white;
+  height: 100%;
+  text-align: center;
+}
+
+.btn-take-pic{
+  background: transparent;
+  border: 2px solid $white;
+  border-radius: 50%;
+  color: $white;
+  font-size: 2em;
+  height: 1.5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
+}
+
+.btn-round{
+  background-color: transparent;
+  border: 2px solid $white;
+  border-radius: 50%;
+  color: $white;
+  font-size: 1.4em;
+  height: 1.5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
+}
+
+.video{
+  max-width: 100%;
+}

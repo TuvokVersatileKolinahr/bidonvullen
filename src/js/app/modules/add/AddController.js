@@ -15,6 +15,7 @@ app.controller('AddController', ['$scope', function($scope) {
   $scope.startWebcam = function() {
     if (webcam.isSupported()) {
       webcam.start({video: true, audio: false}, function(stream) {
+        $scope.isStarted = true;
         // Success function, video is streaming...
         document.getElementById('video').style.display = 'block';
       }, function(e) {
@@ -32,6 +33,7 @@ app.controller('AddController', ['$scope', function($scope) {
   $scope.stopWebcam = function() {
     if (webcam.isStarted()) {
       webcam.stop();
+      $scope.isStarted = false;
     }
   };
 
