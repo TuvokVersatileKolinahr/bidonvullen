@@ -13,6 +13,10 @@ var app = angular.module('bidonvullen', ['ngRoute'])
       controller: 'AddController',
       templateUrl: '/js/app/modules/add/add.html'
     })
+    .when('/users', {
+      controller: 'UsersController',
+      templateUrl: '/js/app/modules/users/users.html'
+    })
     .otherwise({
       controller: 'MainController',
       templateUrl: '/js/app/modules/main/main.html'
