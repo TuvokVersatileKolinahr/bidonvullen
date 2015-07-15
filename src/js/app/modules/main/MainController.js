@@ -7,7 +7,7 @@ app.controller('MainController', function($scope) {
   function showMap() {
     // Google map options
     var mapOptions = {
-      center: new google.maps.LatLng($scope.currentLocation.coords.latitude, $scope.currentLocation.coords.longitude),
+      center: new google.maps.LatLng($scope.location.coords.latitude, $scope.location.coords.longitude),
       zoom: 16,
       panControl: false,
       zoomControlOptions: {
@@ -24,13 +24,30 @@ app.controller('MainController', function($scope) {
     }
 
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    var heremarker = new google.maps.Marker({
+      map: $scope.map,
+      position: new google.maps.LatLng($scope.location.coords.latitude, $scope.location.coords.longitude),
+      title: 'U bent hier',
+      icon: 'img/here-marker.png'
+    }),
+    circle = new google.maps.Circle({
+      map: $scope.map,
+      radius: 200,
+      strokeColor: '#fc4c02',
+      strokeOpacity: 0.6,
+      strokeWeight: 2,
+      fillColor: '#fc4c02',
+      fillOpacity: 0.35,
+      center: heremarker.position
+    });
   }
 
   function showMapOnCurrentLocation() {
     // Get current location
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        $scope.currentLocation = position;
+        $scope.location = position;
         showMap();
       }, function(err) { // PERMISSION_DENIED (1) || POSITION_UNAVAILABLE (2) || TIMEOUT (3)
         showMap();
@@ -42,7 +59,7 @@ app.controller('MainController', function($scope) {
   }
 
   // Current position, defaults to Nijmegen, Gelderland, The Netherlands
-  $scope.currentLocation = {
+  $scope.location = {
     coords: {
       latitude: 51.84520017,
       longitude: 5.83402263
