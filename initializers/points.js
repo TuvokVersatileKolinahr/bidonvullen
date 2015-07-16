@@ -15,13 +15,13 @@ module.exports = {
     }
 
     api.points = {
-      pointAdd: function(userName, title, content, next){
+      pointAdd: function(userName, title, description, next){
         var data = {
           addedBy: userName,
           created: new Date().getTime(),
           type: 'point',
           title: title,
-          description: content
+          description: description
         };
 
         points.insert(data, sluggify(userName + ' ' + title), function(error, body) {
