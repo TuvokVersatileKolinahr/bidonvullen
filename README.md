@@ -11,9 +11,19 @@ bidonvullen
 
 ### Running Production ###
 
+Install dependencies
+
     npm install
+    
+Generate frontend
+
+    gulp
+    
+Start the server
 
     npm start
+
+Goto [`http://localhost:7192/`](http://localhost:7192/) to view the apllication.
 
 ### Running Development ###
     
