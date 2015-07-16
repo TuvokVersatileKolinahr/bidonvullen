@@ -26,7 +26,6 @@ module.exports = {
 
         points.insert(data, sluggify(userName + ' ' + title), function(error, body) {
           if (!error) {
-            console.log(body);
             next(error, body);
           } else
             next(error);
@@ -35,7 +34,6 @@ module.exports = {
       pointView: function(userName, title, next){
         points.get(sluggify(userName + ' ' + title), function (error, body) {
           if (!error) {
-            console.log(body);
             next(error, body);
           } else
             next(error);
@@ -44,7 +42,6 @@ module.exports = {
       userPointsList: function(userName, next){
         points.view('point_list', 'forUser', {'key': userName}, function (error, body) {
           if (!error) {
-            console.log(body);
             next(error, body);
           } else
             next(error);
@@ -53,7 +50,6 @@ module.exports = {
       pointsList: function(userName, next){
         points.view('point_list', 'forUser', function (error, body) {
           if (!error) {
-            console.log(body);
             next(error, body);
           } else
             next(error);
