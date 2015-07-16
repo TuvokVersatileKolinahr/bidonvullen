@@ -3,15 +3,15 @@ exports.pointAdd = {
   description: "I add a point",
   inputs: {
     userName: {required: true},
-    password: {required: true},
+    // password: {required: true},
     title: {required: true},
     content: {required: true},
   },
-  authenticated: true,
+  authenticated: false, //todo: set to true!
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.blog.pointAdd(data.params.userName, data.params.title, data.params.content, function(error){
+    api.points.pointAdd(data.params.userName, data.params.title, data.params.content, function(error){
       next(error);
     });
   }
@@ -28,8 +28,25 @@ exports.pointView = {
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.blog.pointView(data.params.userName, data.params.title, function(error, point){
+    api.points.pointView(data.params.userName, data.params.title, function(error, point){
       data.response.point = point;
+      next(error);
+    });
+  }
+};
+
+exports.userPointsList = {
+  name: "userPointsList",
+  description: "I list all of a user's points",
+  inputs: {
+    userName: {required: true},
+  },
+  authenticated: false,
+  outputExample: {},
+  version: 1.0,
+  run: function(api, data, next){
+    api.points.userPointsList(data.params.userName, function(error, points){
+      data.response.points = points;
       next(error);
     });
   }
@@ -45,7 +62,7 @@ exports.pointsList = {
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.blog.pointsList(data.params.userName, function(error, points){
+    api.points.pointsList(data.params.userName, function(error, points){
       data.response.points = points;
       next(error);
     });
@@ -65,7 +82,7 @@ exports.pointEdit = {
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.blog.pointEdit(data.params.userName, data.params.title, data.params.content, function(error){
+    api.points.pointEdit(data.params.userName, data.params.title, data.params.content, function(error){
       next(error);
     });
   }
@@ -83,7 +100,7 @@ exports.pointDelete = {
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.blog.pointDelete(data.params.userName, data.params.title, function(error){
+    api.points.pointDelete(data.params.userName, data.params.title, function(error){
       next(error);
     });
   }
