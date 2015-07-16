@@ -71,6 +71,9 @@ exports.default = {
         returnErrorCodes: true
       }
     }
+  },
+  database: {
+    host: 'https://flasklocations.smileupps.com/'
   }
 }
 

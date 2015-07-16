@@ -3,7 +3,7 @@ module.exports = {
   startPriority: 1000,
   stopPriority:  1000,
   initialize: function(api, next){
-    var nano = require('nano')('https://flasklocations.smileupps.com');
+    var nano = require('nano')(api.config.database.host);
     var points = nano.use('points');
 
     function sluggify (text) {
