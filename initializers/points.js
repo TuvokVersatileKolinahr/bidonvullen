@@ -15,24 +15,25 @@ module.exports = {
     }
 
     api.points = {
-      pointAdd: function(userName, title, description, next){
+      pointAdd: function(userName, name, description, geolocation, next){
         var data = {
           addedBy: userName,
           created: new Date().getTime(),
           type: 'point',
-          title: title,
-          description: description
+          name: name,
+          description: description,
+          geolocation: JSON.parse(geolocation)
         };
 
-        points.insert(data, sluggify(userName + ' ' + title), function(error, body) {
+        points.insert(data, sluggify(userName + ' ' + name), function(error, body) {
           if (!error) {
             next(error, body);
           } else
             next(error);
         });
       },
-      pointView: function(userName, title, next){
-        points.get(sluggify(userName + ' ' + title), function (error, body) {
+      pointView: function(userName, name, next){
+        points.get(sluggify(userName + ' ' + name), function (error, body) {
           if (!error) {
             next(error, body);
           } else
@@ -55,8 +56,21 @@ module.exports = {
             next(error);
         })
       },
-      pointEdit: function(userName, title, content, next){},
-      pointDelete: function(userName, title, next){},
+      pointEdit: function(userName, name, content, next){},
+      pointDelete: function(userName, password, name, next){
+        points.get(sluggify(userName + ' ' + name), function (fetcherror, deletepoint) {
+          if (!fetcherror) {
+            points.destroy(deletepoint._id, deletepoint._rev, function(error, body) {
+              if (!error)
+                next(error, body);
+              else
+                next(error);
+            });
+          } else {
+            next(fetcherror);
+          };
+        });
+      },
     };
 
     next();

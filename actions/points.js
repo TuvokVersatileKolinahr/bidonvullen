@@ -3,15 +3,15 @@ exports.pointAdd = {
   description: "I add a point",
   inputs: {
     userName: {required: true},
-    // password: {required: true},
-    title: {required: true},
-    content: {required: true},
+    name: {required: true},
+    description: {required: true},
+    geolocation: {required: true}
   },
   authenticated: false, //todo: set to true!
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.points.pointAdd(data.params.userName, data.params.title, data.params.content, function(error){
+    api.points.pointAdd(data.params.userName, data.params.name, data.params.description, data.params.geolocation, function(error){
       next(error);
     });
   }
@@ -22,13 +22,13 @@ exports.pointView = {
   description: "I view a point",
   inputs: {
     userName: {required: true},
-    title: {required: true},
+    name: {required: true},
   },
   authenticated: false,
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.points.pointView(data.params.userName, data.params.title, function(error, point){
+    api.points.pointView(data.params.userName, data.params.name, function(error, point){
       data.response.point = point;
       next(error);
     });
@@ -54,15 +54,16 @@ exports.userPointsList = {
 
 exports.pointsList = {
   name: "pointsList",
-  description: "I list all of a user's points",
+  description: "I list all points",
   inputs: {
-    userName: {required: true},
+    // userName: {required: true},
   },
   authenticated: false,
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.points.pointsList(data.params.userName, function(error, points){
+    // api.points.pointsList(data.params.userName, function(error, points){
+    api.points.pointsList(null, function(error, points){
       data.response.points = points;
       next(error);
     });
@@ -75,14 +76,14 @@ exports.pointEdit = {
   inputs: {
     userName: {required: true},
     password: {required: true},
-    title: {required: true},
+    name: {required: true},
     content: {required: true},
   },
   authenticated: true,
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.points.pointEdit(data.params.userName, data.params.title, data.params.content, function(error){
+    api.points.pointEdit(data.params.userName, data.params.name, data.params.content, function(error){
       next(error);
     });
   }
@@ -94,13 +95,13 @@ exports.pointDelete = {
   inputs: {
     userName: {required: true},
     password: {required: true},
-    title: {required: true},
+    name: {required: true},
   },
   authenticated: true,
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    api.points.pointDelete(data.params.userName, data.params.title, function(error){
+    api.points.pointDelete(data.params.userName, data.params.password, data.params.name, function(error){
       next(error);
     });
   }
