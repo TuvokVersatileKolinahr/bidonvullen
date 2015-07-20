@@ -36,3 +36,5 @@ Goto [`http://localhost:7192/`](http://localhost:7192/) to view the apllication.
     npm test
 
 Open the app on a mobile.
+
+Have fun.
