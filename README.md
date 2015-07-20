@@ -39,4 +39,4 @@ Open the app on a mobile.
 
 if you have an issue, please file one at [the GitHub issue tracker](https://github.com/TuvokVersatileKolinahr/bidonvullen/issues).
 
-Have fun.
+Have fun. Ride safe!
