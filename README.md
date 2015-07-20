@@ -37,4 +37,6 @@ Goto [`http://localhost:7192/`](http://localhost:7192/) to view the apllication.
 
 Open the app on a mobile.
 
+if you have an issue, please file one at [the GitHub issue tracker](https://github.com/TuvokVersatileKolinahr/bidonvullen/issues).
+
 Have fun.
