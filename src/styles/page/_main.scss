@@ -1,7 +1,7 @@
 
 .navbar{
   background: $orange-transparent;
-  border-bottom: 2px dotted $orange-dark;
+  border-bottom: 2px solid $orange;
   box-shadow: 0 0 10px $orange-transparent;
   color: $white;
   position: fixed;
@@ -18,7 +18,7 @@
 }
 
 .btn-add{
-  background-color: $orange-dark;
+  background-color: $orange;
   border: 1px solid $orange;
   border-radius: 50%;
   bottom: .2rem;
