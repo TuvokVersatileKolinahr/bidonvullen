@@ -1,7 +1,8 @@
 **bidonvullen**
 ===========
-[master](https://github.com/TuvokVersatileKolinahr/bidonvullen) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=master)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
-[develop](https://github.com/TuvokVersatileKolinahr/bidonvullen/tree/develop) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=develop)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
+Branch [master](https://github.com/TuvokVersatileKolinahr/bidonvullen) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=master)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
+
+Branch [develop](https://github.com/TuvokVersatileKolinahr/bidonvullen/tree/develop) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=develop)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
 
 
 ----------
