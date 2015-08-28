@@ -11,7 +11,7 @@ exports.default = {
         // Passed to https.createServer if secure=true. Should contain SSL certificates
         serverOptions: {},
         // Port or Socket Path
-        port: process.env.PORT || settings.developmentport,
+        port: process.env.DEV_PORT || settings.developmentport,
         // Which IP to listen on (use '0.0.0.0' for all; '::' for all on ipv4 and ipv6)
         // Set to `null` when listening to socket
         bindIP: '0.0.0.0',
