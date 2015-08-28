@@ -1,6 +1,10 @@
-bidonvullen
+**bidonvullen**
 ===========
-![Travis-ci build status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg)
+[master](https://github.com/TuvokVersatileKolinahr/bidonvullen) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=master)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
+[develop](https://github.com/TuvokVersatileKolinahr/bidonvullen/tree/develop) [![Build Status](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen.svg?branch=develop)](https://travis-ci.org/TuvokVersatileKolinahr/bidonvullen)
+
+
+----------
 
 'Where can I fill my flask?' In a ride of several hours this question might pop up. You need a drink, and you are in unfamiliar terrain. Open this app and you see the locations in a radius.
 
