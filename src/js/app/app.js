@@ -1,7 +1,7 @@
 /**
  * Declaration of the main skeleton app
  */
-var app = angular.module('bidonvullen', ['ngRoute'])
+var app = angular.module('bidonvullen', ['ngRoute', 'ngResource'])
 
 /**
  * Configuration: state your routes and other configuration items here
