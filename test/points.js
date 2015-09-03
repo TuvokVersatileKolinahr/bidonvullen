@@ -70,9 +70,9 @@ describe('integration', function() {
     });
 
     it('should get a list of points', function(done) {
-      request.post(setup.testUrl + "/point", {
+      request.get(setup.testUrl + "/point", {
         form: {
-          userName: "testPoster", 
+          userName: "testPoster",
         }} , function(err, response, body) {
         body = JSON.parse(body);
         should.not.exist(body.error);
@@ -82,7 +82,7 @@ describe('integration', function() {
     });
 
     it('should delete a point', function(done) {
-      request.post(setup.testUrl + "/point", {
+      request.delete(setup.testUrl + "/point", {
         form: {
           userName: "testPoster", 
           password: "password",
