@@ -13,7 +13,7 @@ describe('integration', function() {
     });
   });
 
-  describe('Points API', function() {
+  describe('Points Actions', function() {
 
     it('should create a point', function(done) {
       request.post(setup.testUrl + "/pointAdd", {form: {
@@ -51,6 +51,50 @@ describe('integration', function() {
       });
     });
   
+  }); // end Points Actions
+
+  describe('Points API', function() {
+
+    it('should create a point', function(done) {
+      request.post(setup.testUrl + "/point", {
+        form: {
+          userName: "testPoster", 
+          name: testpoints[0].name, 
+          description: testpoints[0].description,
+          geolocation: JSON.stringify(testpoints[0].geolocation)
+        }} , function(err, response, body) {
+        body = JSON.parse(body);
+        should.not.exist(body.error);
+        done();
+      });
+    });
+
+    it('should get a list of points', function(done) {
+      request.post(setup.testUrl + "/point", {
+        form: {
+          userName: "testPoster", 
+        }} , function(err, response, body) {
+        body = JSON.parse(body);
+        should.not.exist(body.error);
+        body.points.rows.length.should.be.greaterThan(0);
+        done();
+      });
+    });
+
+    it('should delete a point', function(done) {
+      request.post(setup.testUrl + "/point", {
+        form: {
+          userName: "testPoster", 
+          password: "password",
+          name: testpoints[0].name
+        }} , function(err, response, body) {
+        body = JSON.parse(body);
+        should.not.exist(body.error);
+        done();
+      });
+    });
+  
   }); // end Points API
+
 
 }); // end integration
