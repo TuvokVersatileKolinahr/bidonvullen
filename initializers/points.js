@@ -56,7 +56,9 @@ module.exports = {
             next(error);
         })
       },
-      pointEdit: function(userName, name, content, next){},
+      pointEdit: function(userName, name, content, next){
+        next('Not implemented yet.')
+      },
       pointDelete: function(userName, password, name, next){
         points.get(sluggify(userName + ' ' + name), function (fetcherror, deletepoint) {
           if (!fetcherror) {
