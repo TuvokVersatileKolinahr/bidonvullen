@@ -13,6 +13,25 @@ describe('integration', function() {
     });
   });
 
+/*
+    it('should create all testpoints', function(done) {
+      testpoints.forEach(function(testpoint, index) {
+        console.log("Adding testpoint #" + index + ": " + testpoint.name);
+        request.post(setup.testUrl + "/point", {
+          form: {
+            userName: "testPoster", 
+            name: testpoint.name, 
+            description: testpoint.description,
+            geolocation: JSON.stringify(testpoint.geolocation)
+          }} , function(err, response, body) {
+          body = JSON.parse(body);
+          should.not.exist(body.error);
+          done();
+        });
+      });
+    });
+*/
+
   describe('Points Actions', function() {
     console.log("Testing with " + testpoints[0].name);
 
