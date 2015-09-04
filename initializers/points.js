@@ -4,7 +4,7 @@ module.exports = {
   stopPriority:  1000,
   initialize: function(api, next){
     var nano = require('nano')(api.config.database.host);
-    var points = nano.use('points');
+    var points = nano.use(api.config.database.points);
 
     function sluggify (text) {
         var slug = text.replace(/[^a-zA-Z0-9\s]/g,"");
