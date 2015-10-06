@@ -10,4 +10,4 @@ sudo: false
 
 script:
   - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=PhantomJS
-  - gulp test:e2e 
+  #- gulp test:e2e 
