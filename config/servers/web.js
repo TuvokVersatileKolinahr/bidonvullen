@@ -73,7 +73,8 @@ exports.default = {
     }
   },
   database: {
-    host: 'https://flasklocations.smileupps.com/'
+    host: 'https://flasks-dev.smileupps.com/',
+    points: 'points'
   }
 }
 
@@ -90,6 +91,10 @@ exports.production = {
         }
       }
     }
+  },
+  database: {
+    host: 'https://flasklocations.smileupps.com/',
+    points: 'points'
   }
 }
 
@@ -106,5 +111,9 @@ exports.test = {
         }
       }
     }
+  },
+  database: {
+    host: 'https://flasks-dev.smileupps.com/',
+    points: 'pointstest'
   }
 }

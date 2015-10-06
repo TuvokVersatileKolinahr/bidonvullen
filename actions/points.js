@@ -56,13 +56,12 @@ exports.pointsList = {
   name: "pointsList",
   description: "I list all points",
   inputs: {
-    // userName: {required: true},
+    userName: {required: true},
   },
   authenticated: false,
   outputExample: {},
   version: 1.0,
   run: function(api, data, next){
-    // api.points.pointsList(data.params.userName, function(error, points){
     api.points.pointsList(null, function(error, points){
       data.response.points = points;
       next(error);

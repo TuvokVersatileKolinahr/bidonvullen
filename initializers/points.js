@@ -4,7 +4,7 @@ module.exports = {
   stopPriority:  1000,
   initialize: function(api, next){
     var nano = require('nano')(api.config.database.host);
-    var points = nano.use('points');
+    var points = nano.use(api.config.database.points);
 
     function sluggify (text) {
         var slug = text.replace(/[^a-zA-Z0-9\s]/g,"");
@@ -56,7 +56,9 @@ module.exports = {
             next(error);
         })
       },
-      pointEdit: function(userName, name, content, next){},
+      pointEdit: function(userName, name, content, next){
+        next('Not implemented yet.')
+      },
       pointDelete: function(userName, password, name, next){
         points.get(sluggify(userName + ' ' + name), function (fetcherror, deletepoint) {
           if (!fetcherror) {

@@ -1,14 +1,14 @@
   
 
-  <h2>jouw punten</h2>
+  <h2>Theo's point(s)</h2>
 
+  <!--<strong>{{ oneUser }}</strong>-->
 
   <div>
 
-    <ul>
-      <li>punt</li>
-      <li>punt</li>
-      <li>punt</li>
+    <ul ng-repeat="point in points.points.rows">
+      <li><strong>Id:</strong> {{ point.id }}</li>
+      <li><strong>Description:</strong> {{ point.value.description }}</li>
     </ul>
     
   </div>
